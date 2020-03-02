@@ -1,0 +1,69 @@
+version: '3.0'
+
+services:
+
+  server:
+    image: node:12
+    working_dir: /app
+    ports:
+      - 3000:3000
+    volumes:
+      - ./app:/app
+    networks:
+      - nest-bull
+    command: npm run start:dev
+    environment:
+      REDIS_URL: redis://cache
+    depends_on:
+      - worker
+
+  worker:
+    image: node:12
+    working_dir: /worker
+    volumes:
+      - ./worker:/worker
+    networks:
+      - nest-bull
+    command: npm run start:dev
+    environment:
+      REDIS_URL: redis://cache:6379
+    depends_on:
+      - redis
+
+  cli:
+    build:
+      context: ./cli
+    tty: true
+    working_dir: /app
+    volumes:
+      - ./app:/app
+      - ./worker:/worker
+    networks:
+      - nest-bull
+    environment:
+      REDIS_URL: redis://cache
+
+  redis:
+    image: redis
+    networks:
+      - nest-bull
+    expose:
+    - 6379
+
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    networks:
+      - nest-bull
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
+
+
+
+# Networks
+networks:
+  nest-bull:

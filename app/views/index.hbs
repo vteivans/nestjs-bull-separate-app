@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>App</title>
+  </head>
+  <body>
+    <strong>{{ message }}</strong>
+    <br>
+    <a href="/create-job" class="create-a-job">Create a job</a>
+    <pre class="res">
+
+    </pre>
+    <script>
+      const createA = document.querySelector('.create-a-job');
+      const res = document.querySelector('.res');
+      createA.addEventListener('click', async function(event) {
+        event.preventDefault();
+        const result = await fetch(this.href).then(res => res.json());
+        res.innerHTML = JSON.stringify(result, null, 2);
+      });
+    </script>
+  </body>
+</html>

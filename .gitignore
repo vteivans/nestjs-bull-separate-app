@@ -1,0 +1,40 @@
+/worker/cache
+/app/cache
+# compiled output
+/app/dist
+/worker/dist
+/app/node_modules
+/worker/node_modules
+
+# Logs
+/app/logs
+/app/*.log
+/app/npm-debug.log*
+/app/yarn-debug.log*
+/app/yarn-error.log*
+/app/lerna-debug.log*
+
+# OS
+/.DS_Store
+
+# Tests
+/app/coverage
+/app/.nyc_output
+/worker/coverage
+/worker/.nyc_output
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
