@@ -13,7 +13,7 @@ services:
       - nest-bull
     command: npm run start:dev
     environment:
-      REDIS_URL: redis://cache
+      REDIS_URL: redis://redis:6379
     depends_on:
       - worker
 
@@ -26,7 +26,7 @@ services:
       - nest-bull
     command: npm run start:dev
     environment:
-      REDIS_URL: redis://cache:6379
+      REDIS_URL: redis://redis:6379
     depends_on:
       - redis
 
@@ -41,7 +41,7 @@ services:
     networks:
       - nest-bull
     environment:
-      REDIS_URL: redis://cache
+      REDIS_URL: redis://redis:6379
 
   redis:
     image: redis

@@ -4,10 +4,10 @@ import { WorkerModule } from './worker.module';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice(WorkerModule, {
-    transport: Transport.TCP,
-    // options: {
-    //   url: process.env.REDIS_URL,
-    // },
+    transport: Transport.REDIS,
+    options: {
+      url: process.env.REDIS_URL,
+    },
   });
 
   app.listen(() => console.log('Microservice is listening'));

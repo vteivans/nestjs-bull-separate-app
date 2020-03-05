@@ -6,10 +6,7 @@ import { WorkerProcessor } from './worker.processor';
   imports: [
     BullModule.registerQueue({
       name: 'audio',
-      redis: {
-        host: 'redis',
-        port: 6379,
-      },
+      redis: process.env.REDIS_URL,
     }),
   ],
   providers: [WorkerProcessor],

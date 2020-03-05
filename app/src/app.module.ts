@@ -7,10 +7,7 @@ import { AppService } from './app.service';
   imports: [
     BullModule.registerQueue({
       name: 'audio',
-      redis: {
-        host: 'redis',
-        port: 6379,
-      },
+      redis: process.env.REDIS_URL,
     }),
   ],
   controllers: [AppController],
